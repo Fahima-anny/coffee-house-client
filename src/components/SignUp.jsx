@@ -25,7 +25,7 @@ createUser(email, password)
     const newUser = {name, email, createdAt} ;
 
     // add user in db 
-    fetch("http://localhost:5000/users", {
+    fetch("https://coffee-store-server-seven-smoky.vercel.app/users", {
         method: "POST",
         headers: {
             "content-type": "application/json"
@@ -77,7 +77,7 @@ createUser(email, password)
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Sign Up</button>
+                <button className="btn btn-primary">Sign Up or Register</button>
               </div>
               <p>Already have an account? <Link to="/signin" className="text-primary">Sign In</Link> now</p>
             </form>

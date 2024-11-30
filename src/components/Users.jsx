@@ -20,7 +20,7 @@ const handleDelete = id => {
       }).then((result) => {
         if (result.isConfirmed) {
 
-fetch(`http://localhost:5000/users/${id}`, {
+fetch(`https://coffee-store-server-seven-smoky.vercel.app/users/${id}`, {
     method: "DELETE"
 })
 .then(res => res.json())
@@ -48,7 +48,7 @@ const handleEdit = id => {
 
     return (
         <div>
-            <h1>Users: {users.length}</h1>
+            <h1>Users: {users?.length}</h1>
 
             <div className="overflow-x-auto">
   <table className="table">
@@ -66,7 +66,7 @@ const handleEdit = id => {
     <tbody>
       {/* row 1 */}
   {
-    users.map((user, index) => 
+    users?.map((user, index) => 
         <tr key={user._id}>
         <th>{index+1}</th>
         <td>{user.name}</td>
