@@ -15,6 +15,14 @@ import SignIn from './components/SignIn.jsx';
 import SignUp from './components/SignUp.jsx';
 import AuthProvider from './AuthProvider/AuthProvider.jsx';
 import Users from './components/Users.jsx';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import Users2 from './components/Users2.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +32,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        loader: () => fetch('https://coffee-store-server-seven-smoky.vercel.app/coffee')
+        loader: () => fetch('http://localhost:5000/coffee')
       },
       {
         path: 'addCoffee',
@@ -33,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: 'updateCoffee/:id',
         element: <UpdateCoffee></UpdateCoffee>,
-        loader: ({ params }) => fetch(`https://coffee-store-server-seven-smoky.vercel.app/coffee/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/coffee/${params.id}`)
       },
       {
         path: "/signin",
@@ -45,17 +53,26 @@ const router = createBrowserRouter([
       },
       {
         path: "/users",
-        element: <Users></Users> ,
-        loader: () => fetch("https://coffee-store-server-seven-smoky.vercel.app/users")
+        element: <Users></Users>,
+        loader: () => fetch("http://localhost:5000/users")
+      },
+      {
+        path: "/users2",
+        element: <Users2></Users2>,
       },
     ]
   },
 ]);
 
+// Create a client
+const queryClient = new QueryClient()
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-<AuthProvider>
-<RouterProvider router={router} />
-</AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )

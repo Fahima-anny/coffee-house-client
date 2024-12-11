@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 const SignUp = () => {
@@ -25,20 +26,31 @@ createUser(email, password)
     const newUser = {name, email, createdAt} ;
 
     // add user in db 
-    fetch("https://coffee-store-server-seven-smoky.vercel.app/users", {
-        method: "POST",
-        headers: {
-            "content-type": "application/json"
-        },
-        body: JSON.stringify(newUser)
+    // fetch("http://localhost:5000/users", {
+    //     method: "POST",
+    //     headers: {
+    //         "content-type": "application/json"
+    //     },
+    //     body: JSON.stringify(newUser)
+    // })
+    // .then(res => res.json())
+    // .then(data => {
+    //     console.log(data)
+    //     if(data?.insertedId){
+    //         alert("New User Created")
+    //     }
+    // })
+
+
+    // add user in db using axios
+    axios.post('http://localhost:5000/users', newUser )
+    .then(res => {
+      console.log(res.data);
     })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-        if(data?.insertedId){
-            alert("New User Created")
-        }
-    })
+
+
+
+
 })
 .catch(er => console.log(er))
 }

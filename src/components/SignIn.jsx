@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 const SignIn = () => {
@@ -22,21 +23,31 @@ const email = form.email.value ;
 const lastSignInTime = res?.user?.metadata?.lastSignInTime
 const loginInfo = {email, lastSignInTime} ;
 
-fetch(`https://coffee-store-server-seven-smoky.vercel.app/users`,{
-    method: "PATCH",
-    headers: {
-        "content-type": "application/json"
-    },
-    body: JSON.stringify(loginInfo)
-})
-.then(res => res.json())
-.then(data => {
-    console.log(data)
+
+// fetch(`http://localhost:5000/users`,{
+//     method: "PATCH",
+//     headers: {
+//         "content-type": "application/json"
+//     },
+//     body: JSON.stringify(loginInfo)
+// })
+// .then(res => res.json())
+// .then(data => {
+//     console.log(data)
+// })
+
+//  })
+//  .catch(er => {
+//     console.log(er)
+
+
+
+// with axios 
+axios.patch("http://localhost:5000/users", loginInfo)
+.then(res => {
+  console.log(res.data)
 })
 
- })
- .catch(er => {
-    console.log(er)
  })
 
 }

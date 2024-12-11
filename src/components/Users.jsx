@@ -20,7 +20,7 @@ const handleDelete = id => {
       }).then((result) => {
         if (result.isConfirmed) {
 
-fetch(`https://coffee-store-server-seven-smoky.vercel.app/users/${id}`, {
+fetch(`http://localhost:5000/users/${id}`, {
     method: "DELETE"
 })
 .then(res => res.json())
